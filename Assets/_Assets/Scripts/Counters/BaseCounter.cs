@@ -15,7 +15,7 @@ public class BaseCounter : MonoBehaviour, IKitchenObjectParent
 
     public virtual void InteractAlternate(Player player)
     {
-        Debug.Log("BaseCounter InteractAlternate ! nao deve ser chamado nunca. esta aqui para termos o metodo descrito, como virtual, deixando a implementacao para o caller");
+        //Debug.Log("BaseCounter InteractAlternate ! nao deve ser chamado nunca. esta aqui para termos o metodo descrito, como virtual, deixando a implementacao para o caller");
     }
 
     public Transform GetKitchenObjectFollowTransform()

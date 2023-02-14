@@ -1,0 +1,36 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using UnityEngine;
+
+public class PlatesCounter : BaseCounter
+{
+    [SerializeField] private KitchenObjectSO plateKitchenObjectSO;
+
+    public event EventHandler OnPlateSpawned;
+
+    private float spawnPlateTimer;
+    private float spawnPlateTimerMax = 2f;
+    private int platesSpawnedAmount;
+    private int platesSpawnedAmountMax = 4;
+
+
+
+    void Update()
+    {
+        spawnPlateTimer += Time.deltaTime;
+
+        if (spawnPlateTimer > spawnPlateTimerMax)
+        {
+            spawnPlateTimer = 0f;
+
+            if (platesSpawnedAmount < platesSpawnedAmountMax)
+            {
+                platesSpawnedAmount++;
+
+                OnPlateSpawned?.Invoke(this, EventArgs.Empty);
+            }
+        }
+    }
+}

@@ -9,6 +9,7 @@ public class PlatesCounter : BaseCounter
     [SerializeField] private KitchenObjectSO plateKitchenObjectSO;
 
     public event EventHandler OnPlateSpawned;
+    public event EventHandler OnPlateRemoved;
 
     private float spawnPlateTimer;
     private float spawnPlateTimerMax = 2f;
@@ -32,5 +33,23 @@ public class PlatesCounter : BaseCounter
                 OnPlateSpawned?.Invoke(this, EventArgs.Empty);
             }
         }
+    }
+
+
+    public override void Interact(Player player)
+    {
+        if (!player.HasKitchenObject())
+        {
+            // player nao tem nada na mao
+            if (platesSpawnedAmount > 0 )
+            {
+                platesSpawnedAmount--;
+
+                KitchenObject.SpawnKitchenObject(plateKitchenObjectSO, player);
+
+                OnPlateRemoved?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
     }
 }
